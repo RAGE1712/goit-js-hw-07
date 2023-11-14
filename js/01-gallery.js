@@ -26,22 +26,26 @@ function galleryMarkup(arr) {
 list.addEventListener("click", handleClick)
 
 function handleClick(event) {
-    event.preventDefault()
+  event.preventDefault();
   if (event.target === event.currentTarget) {
     return;
-     }
-    const currentImageSrc = event.target.dataset.source;
-    const bigImage = `<img src="${currentImageSrc}" width="800" height="600">`;
-    const instance = basicLightbox.create(bigImage);
-
-    instance.show();
-    document.addEventListener("keydown", closeModal);
-
-    function closeModal(event) {
-      if (event.key === "Escape") {
+  }
+  const currentImageSrc = event.target.dataset.source;
+  const bigImage = `<img src="${currentImageSrc}" width="800" height="600">`;
+  const instance = basicLightbox.create(bigImage, {
+    onShow: (instance) =>
+      document.addEventListener("keydown", closeModal),
+    onClose: (instance) =>
+      document.removeEventListener("keydown", closeModal),
+  });
+    
+  instance.show();
+  
+  function closeModal(event) {
+    console.log(event.key);
+    if (event.key === "Escape") {
         instance.close();
-        document.removeEventListener("keydown", closeModal);
-      }
-    }    
+    }
+  }
 }
 
