@@ -22,16 +22,8 @@ function galleryMarkup(arr) {
     .join("");
 }
 
-list.addEventListener("click", handleClick);
-
-function handleClick(event) {
-    event.preventDefault();
-    var lightbox = new SimpleLightbox(".gallery a", {
+    let lightbox = new SimpleLightbox(".gallery a", {
       captionsData: "alt",
       captionPosition: "bottom",
       captionDelay: 250,
-      //   overlay: false
-    //   fadeSpeed: 1
     });
-
-}
